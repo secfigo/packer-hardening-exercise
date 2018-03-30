@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  roles:
+    - geerlingguy.packer-debian
+    - dev-sec.os-hardening 
+
+  tasks:
+    - apt: "name={{ item }} state=installed"
+      with_items:
+        - git
+        - wget
+        - curl
+        - vim
